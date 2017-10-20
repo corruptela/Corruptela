@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        <meta charset="utf-8">
+	<meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	 <!-- Bootstrap CSS -->
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
         <title>Corruptela</title>
 
@@ -11,6 +13,7 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+
         <style>
             html, body {
                 background-color: #fff;
@@ -62,10 +65,13 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-        </style>
+        </style> 
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+<div class="flex-center position-ref full-height">
+	<h1>Corruptela</h1>
+</div>
+<!--        <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -79,13 +85,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <img src="https://lh5.googleusercontent.com/deumV01pvj5-R0XkRT8v60vXfzFoDjICiLoUkbPnVaRE2GOR6IBTVdbm4PbmEAPvGf-zavzPZpUVZQU=w1920-h971" alt="Corruptela">
+		Corruptela
                 </div>
 
                 <div class="links">
                     
                 </div>
             </div>
-        </div>
+        </div> -->
     </body>
 </html>
