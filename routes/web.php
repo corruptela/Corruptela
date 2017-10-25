@@ -12,5 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   return view('welcome');
+//return 'pagina inicial';
 });
+
+Route::get('/contato', function () {
+	return 'TESTANDO ROTA';
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
