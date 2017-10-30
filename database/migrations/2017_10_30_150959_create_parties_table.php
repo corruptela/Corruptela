@@ -15,6 +15,10 @@ class CreatePartiesTable extends Migration
     {
         Schema::create('parties', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 250);
+            $table->string('initials',60);
+            $table->string('image', 200)->nullable();
+            $table->boolean('active');
             $table->timestamps();
         });
     }
