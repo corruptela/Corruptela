@@ -16,9 +16,8 @@ Route::get('/', function () {
 //return 'pagina inicial';
 });
 
-Route::get('/contato', function () {
-	return 'TESTANDO ROTA';
-});
+    Route::any('/painel/partidos/pesquisar', 'Painel\PartidoController@search')->name('partidos.search');
+    Route::resource('/painel/partidos', 'Painel\PartidoController');
 
 Auth::routes();
 
