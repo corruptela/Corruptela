@@ -11,7 +11,7 @@ class PartidoController extends Controller
 {
     //
     private $party;
-    private $totalPage = 10;
+    private $totalPage = 20;
     
     
     public function __construct(Party $party)
@@ -43,7 +43,7 @@ class PartidoController extends Controller
         $title = 'Cadastrar Novo Partido';
         
         
-        $categorys = party::pluck('name', 'id');
+        //$categorys = party::pluck('name', 'id');
         //$categorys->prepend('Escolha a Categoria!', '');
         //dd($categorys);
         
@@ -100,7 +100,7 @@ class PartidoController extends Controller
     {
         $party = $this->party->find($id);
         
-        $title = "Produto: {$party->name}";
+        $title = "Produto:{$party->id} {$party->name}";
         
         return view('painel.parties.show', compact('party', 'title'));
     }
@@ -116,11 +116,11 @@ class PartidoController extends Controller
         //Recupera o produto pelo seu id
         $party = $this->party->find($id);
         
-        $title = "Editar Produto: {$party->name}";
+        $title = "Editar Produto:{$party->id} {$party->name}";
         
-        $categorys = ['eletronicos', 'moveis', 'limpeza', 'banho'];
+       // $categorys = ['eletronicos', 'moveis', 'limpeza', 'banho'];
         
-        return view('painel.parties.create-edit', compact('title', 'categorys', 'party'));
+        return view('painel.parties.create-edit', compact('title', 'party'));
     }
     
     /**
@@ -264,7 +264,7 @@ class PartidoController extends Controller
         //Faz o filtro dos dados
         $parties = $this->party
         ->where('name', 'LIKE', "%$keySearch%")
-        ->orWhere('description', 'LIKE', "%$keySearch%")
+        ->orWhere('initials', 'LIKE', "%$keySearch%")
         ->paginate($this->totalPage);
         
         return view('painel.parties.index', compact('parties', 'title', 'dataForm'));
