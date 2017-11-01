@@ -1,4 +1,4 @@
-@extends('painel.templates.template')
+@extends('layouts.app')
 
 @section('content')
 
