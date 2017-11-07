@@ -19,10 +19,10 @@ class CreatePartiesTable extends Migration
             $table->string('initials',60);
             $table->string('image', 200)->nullable();
             $table->boolean('active');
-            $table->integer('federativeunits_id')->unsigned();
-            $table->foreign('federativeunits_id')
+            $table->integer('countries_id')->unsigned();
+            $table->foreign('countries_id')
             ->references('id')
-            ->on('federative_units');
+            ->on('countries');
             $table->timestamps();
             
         });
