@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePartiesTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,12 @@ class CreatePartiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('parties', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 250);
             $table->string('initials',60);
-            $table->string('image', 200)->nullable();
-            $table->boolean('active');
-            $table->integer('federativeunits_id')->unsigned();
-            $table->foreign('federativeunits_id')
-            ->references('id')
-            ->on('federative_units');
+            $table->integer('oficialid');
             $table->timestamps();
-            
         });
     }
 
@@ -35,6 +29,6 @@ class CreatePartiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parties');
+        Schema::dropIfExists('countries');
     }
 }

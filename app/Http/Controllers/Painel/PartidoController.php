@@ -17,6 +17,7 @@ class PartidoController extends Controller
     public function __construct(Party $party)
     {
         $this->party = $party;
+        $this->middleware('auth');
     }
     
     /**
