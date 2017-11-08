@@ -18,6 +18,9 @@ Route::get('/', function () {
 
     Route::any('/painel/partidos/pesquisar', 'Painel\PartidoController@search')->name('partidos.search');
     Route::resource('/painel/partidos', 'Painel\PartidoController');
+Route::get('/painel/paises' , function (){
+ return view('/painel/countries/index');
+});	
 
 Auth::routes();
 
