@@ -4,19 +4,18 @@ namespace App\Http\Controllers\Painel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Painel\Party;
-use App\Http\Requests\Painel\PartyFormRequest;
+use App\Models\Painel\Country;
+use App\Http\Requests\Painel\CountryFormRequest;
 
-class PartidoController extends Controller
+class PaisController extends Controller
 {
-    //
-    private $party;
+    private $country;
     private $totalPage = 20;
     
     
-    public function __construct(Party $party)
+    public function __construct(country $country)
     {
-        $this->party = $party;
+        $this->country = $country;
         $this->middleware('auth');
     }
     
@@ -27,11 +26,11 @@ class PartidoController extends Controller
      */
     public function index()
     {
-        $title = 'Listagem dos partidos';
+        $title = 'Listagem dos PaÃ­ses';
         
-        $parties = $this->party->paginate($this->totalPage);
+        $countries = $this->country->paginate($this->totalPage);
         
-        return view('painel.parties.index', compact('parties', 'title'));
+        return view('painel.countries.index', compact('countries', 'title'));
     }
     
     /**
@@ -41,14 +40,14 @@ class PartidoController extends Controller
      */
     public function create()
     {
-        $title = 'Cadastrar Novo Partido';
+        $title = 'Cadastrar Novo PaÃ­ses';
         
         
-        //$categorys = party::pluck('name', 'id');
+        //$categorys = country::pluck('name', 'id');
         //$categorys->prepend('Escolha a Categoria!', '');
         //dd($categorys);
         
-        return view('painel.parties.create-edit', compact('title'));
+        return view('painel.countries.create-edit', compact('title'));
     }
     
     /**
@@ -57,25 +56,25 @@ class PartidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PartyFormRequest $request)
+    public function store(countryFormRequest $request)
     {
-        //Pega todos os dados que vem do formulário
+        //Pega todos os dados que vem do formulÃ¡rio
         $dataForm = $request->all();
         
         $dataForm['active'] = ( !isset($dataForm['active']) ) ? 0 : 1;
         
         //Valida os dados
-        //$this->validate($request, $this->party->rules);
+        //$this->validate($request, $this->country->rules);
         /*
          $messages = [
-         'name.required' => 'O campo nome é de preenchimento obrigatório!',
-         'number.numeric' => 'Precisa ser apenas números!',
-         'number.required' => 'O campo número é de preenchimento obrigatório!',
+         'name.required' => 'O campo nome Ã© de preenchimento obrigatÃ³rio!',
+         'number.numeric' => 'Precisa ser apenas nÃºmeros!',
+         'number.required' => 'O campo nÃºmero Ã© de preenchimento obrigatÃ³rio!',
          ];
-         $validate = validator($dataForm, $this->party->rules, $messages);
+         $validate = validator($dataForm, $this->country->rules, $messages);
          if( $validate->fails() ) {
          return redirect()
-         ->route('partidos.create')
+         ->route('Paises.create')
          ->withErrors($validate)
          ->withInput();
          }
@@ -83,12 +82,12 @@ class PartidoController extends Controller
          */
         
         //Faz o cadastro
-        $insert = $this->party->create($dataForm);
+        $insert = $this->country->create($dataForm);
         
         if( $insert )
-            return redirect()->route('partidos.index');
+            return redirect()->route('Paises.index');
             else
-                return redirect()->route('partidos.create');
+                return redirect()->route('Paises.create');
     }
     
     /**
@@ -99,11 +98,11 @@ class PartidoController extends Controller
      */
     public function show($id)
     {
-        $party = $this->party->find($id);
+        $country = $this->country->find($id);
         
-        $title = "Partido:{$party->id} {$party->name}";
+        $title = "PaÃ­s:{$country->id} {$country->name}";
         
-        return view('painel.parties.show', compact('party', 'title'));
+        return view('painel.countries.show', compact('country', 'title'));
     }
     
     /**
@@ -115,13 +114,13 @@ class PartidoController extends Controller
     public function edit($id)
     {
         //Recupera o produto pelo seu id
-        $party = $this->party->find($id);
+        $country = $this->country->find($id);
         
-        $title = "Editar Produto:{$party->id} {$party->name}";
+        $title = "Editar PaÃ­s:{$country->id} {$country->name}";
         
        // $categorys = ['eletronicos', 'moveis', 'limpeza', 'banho'];
         
-        return view('painel.parties.create-edit', compact('title', 'party'));
+        return view('painel.countries.create-edit', compact('title', 'country'));
     }
     
     /**
@@ -131,25 +130,25 @@ class PartidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PartyFormRequest $request, $id)
+    public function update(countryFormRequest $request, $id)
     {
-        //Recupera todos os dados do formulário
+        //Recupera todos os dados do formulÃ¡rio
         $dataForm = $request->all();
         
         //Recupera o item para editar
-        $party = $this->party->find($id);
+        $country = $this->country->find($id);
         
-        //Verifica se o produto está ativado
+        //Verifica se o produto estÃ¡ ativado
         $dataForm['active'] = ( !isset($dataForm['active']) ) ? 0 : 1;
         
         //Altera os itens
-        $update = $party->update($dataForm);
+        $update = $country->update($dataForm);
         
         //Verifica se realmente editou
         if( $update )
-            return redirect()->route('partidos.index');
+            return redirect()->route('Paises.index');
             else
-                return redirect()->route('partidos.edit', $id)->with(['errors' => 'Falha ao editar']);
+                return redirect()->route('Paises.edit', $id)->with(['errors' => 'Falha ao editar']);
     }
     
     /**
@@ -160,20 +159,20 @@ class PartidoController extends Controller
      */
     public function destroy($id)
     {
-        $party = $this->party->find($id);
+        $country = $this->country->find($id);
         
-        $delete = $party->delete();
+        $delete = $country->delete();
         
         if( $delete )
-            return redirect()->route('partidos.index');
+            return redirect()->route('Paises.index');
             else
-                return redirect()->route('partidos.show', $id)->with(['errors' => 'Falha ao deletar']);
+                return redirect()->route('Paises.show', $id)->with(['errors' => 'Falha ao deletar']);
     }
     
     public function tests()
     {
         /*
-         $prod = $this->party;
+         $prod = $this->country;
          $prod->name = 'Nome do Produto';
          $prod->number = 131231;
          $prod->active = true;
@@ -188,12 +187,12 @@ class PartidoController extends Controller
          *
          */
          /*
-          $insert = $this->party->create([
+          $insert = $this->country->create([
           'name'          => 'Nome do Produto 2',
           'number'        => 434435,
           'active'        => false,
           'category'      => 'eletronicos',
-          'description'   => 'Descrição vem aqui',
+          'description'   => 'DescriÃ§Ã£o vem aqui',
           ]);
           if( $insert )
           return "Inserido com sucesso, ID: {$insert->id}";
@@ -202,7 +201,7 @@ class PartidoController extends Controller
           *
           */
           /*
-           $prod = $this->party->find(5);
+           $prod = $this->country->find(5);
            $prod->name = 'Update 2';
            $prod->number = 797890;
            $update = $prod->save();
@@ -214,7 +213,7 @@ class PartidoController extends Controller
            *
            */
            /*
-            $prod = $this->party->find(6);
+            $prod = $this->country->find(6);
             $update = $prod->update([
             'name'          => 'Update Test',
             'number'        => 6765756,
@@ -229,7 +228,7 @@ class PartidoController extends Controller
             */
             
             /*
-             $update = $this->party
+             $update = $this->country
              ->where('number', 6765756)
              ->update([
              'name'          => 'Update Test 2',
@@ -243,7 +242,7 @@ class PartidoController extends Controller
              return 'Falha ao alterar.';
              *
              
-             $delete = $this->party
+             $delete = $this->country
              ->where('number', 67657560)
              ->delete();
              
@@ -255,20 +254,19 @@ class PartidoController extends Controller
     
     public function search(Request $request)
     {
-        //Pega os dados do formulário
+        //Pega os dados do formulÃ¡rio
         $dataForm = $request->except('_token');
         $keySearch = $dataForm['search'];
         
-        //Título da página
-        $title = "Resultados para produto: {$keySearch}";
+        //TÃ­tulo da pÃ¡gina
+        $title = "Resultados para PaÃ­s: {$keySearch}";
         
         //Faz o filtro dos dados
-        $parties = $this->party
+        $countries = $this->country
         ->where('name', 'LIKE', "%$keySearch%")
         ->orWhere('initials', 'LIKE', "%$keySearch%")
         ->paginate($this->totalPage);
         
-        return view('painel.parties.index', compact('parties', 'title', 'dataForm'));
+        return view('painel.countries.index', compact('countries', 'title', 'dataForm'));
     }
-    
 }
