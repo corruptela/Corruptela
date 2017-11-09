@@ -60,34 +60,15 @@ class PaisController extends Controller
     {
         //Pega todos os dados que vem do formulário
         $dataForm = $request->all();
-        
-        $dataForm['active'] = ( !isset($dataForm['active']) ) ? 0 : 1;
-        
-        //Valida os dados
-        //$this->validate($request, $this->country->rules);
-        /*
-         $messages = [
-         'name.required' => 'O campo nome é de preenchimento obrigatório!',
-         'number.numeric' => 'Precisa ser apenas números!',
-         'number.required' => 'O campo número é de preenchimento obrigatório!',
-         ];
-         $validate = validator($dataForm, $this->country->rules, $messages);
-         if( $validate->fails() ) {
-         return redirect()
-         ->route('Paises.create')
-         ->withErrors($validate)
-         ->withInput();
-         }
-         *
-         */
+            
         
         //Faz o cadastro
         $insert = $this->country->create($dataForm);
         
         if( $insert )
-            return redirect()->route('Paises.index');
+            return redirect()->route('paises.index');
             else
-                return redirect()->route('Paises.create');
+                return redirect()->route('paises.create');
     }
     
     /**
@@ -137,18 +118,15 @@ class PaisController extends Controller
         
         //Recupera o item para editar
         $country = $this->country->find($id);
-        
-        //Verifica se o produto está ativado
-        $dataForm['active'] = ( !isset($dataForm['active']) ) ? 0 : 1;
-        
+       
         //Altera os itens
         $update = $country->update($dataForm);
         
         //Verifica se realmente editou
         if( $update )
-            return redirect()->route('Paises.index');
+            return redirect()->route('paises.index');
             else
-                return redirect()->route('Paises.edit', $id)->with(['errors' => 'Falha ao editar']);
+                return redirect()->route('paises.edit', $id)->with(['errors' => 'Falha ao editar']);
     }
     
     /**
@@ -164,92 +142,14 @@ class PaisController extends Controller
         $delete = $country->delete();
         
         if( $delete )
-            return redirect()->route('Paises.index');
+            return redirect()->route('paises.index');
             else
-                return redirect()->route('Paises.show', $id)->with(['errors' => 'Falha ao deletar']);
+                return redirect()->route('paises.show', $id)->with(['errors' => 'Falha ao deletar']);
     }
     
     public function tests()
     {
-        /*
-         $prod = $this->country;
-         $prod->name = 'Nome do Produto';
-         $prod->number = 131231;
-         $prod->active = true;
-         $prod->category = 'eletronicos';
-         $prod->description = 'Description do produto aqui';
-         $insert = $prod->save();
-         
-         if( $insert )
-         return 'Inserido com sucesso';
-         else
-         return 'Falha ao inserir';
-         *
-         */
-         /*
-          $insert = $this->country->create([
-          'name'          => 'Nome do Produto 2',
-          'number'        => 434435,
-          'active'        => false,
-          'category'      => 'eletronicos',
-          'description'   => 'Descrição vem aqui',
-          ]);
-          if( $insert )
-          return "Inserido com sucesso, ID: {$insert->id}";
-          else
-          return 'Falha ao inserir';
-          *
-          */
-          /*
-           $prod = $this->country->find(5);
-           $prod->name = 'Update 2';
-           $prod->number = 797890;
-           $update = $prod->save();
-           
-           if( $update )
-           return 'Alterado com sucesso!';
-           else
-           return 'Falha ao alterar.';
-           *
-           */
-           /*
-            $prod = $this->country->find(6);
-            $update = $prod->update([
-            'name'          => 'Update Test',
-            'number'        => 6765756,
-            'active'        => true,
-            ]);
-            
-            if( $update )
-            return 'Alterado com sucesso!';
-            else
-            return 'Falha ao alterar.';
-            *
-            */
-            
-            /*
-             $update = $this->country
-             ->where('number', 6765756)
-             ->update([
-             'name'          => 'Update Test 2',
-             'number'        => 67657560,
-             'active'        => false,
-             ]);
-             
-             if( $update )
-             return 'Alterado com sucesso 2!';
-             else
-             return 'Falha ao alterar.';
-             *
-             
-             $delete = $this->country
-             ->where('number', 67657560)
-             ->delete();
-             
-             if( $delete )
-                 return 'Deletado com sucesso 2';
-                 else
-                     return 'Falha ao deletar';*/
+       
     }
     
     public function search(Request $request)

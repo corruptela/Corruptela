@@ -28,10 +28,7 @@
     </div>
 
     <div class="form-group">
-        <label>
-            {!! Form::checkbox('active') !!}
-            Ativo?
-        </label>
+        {!! Form::text('oficialid', null, ['class' => 'form-control', 'placeholder' => 'Código Oficial Bacen:']) !!}
     </div>
 
       

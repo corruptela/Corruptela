@@ -17,10 +17,13 @@ Route::get('/', function () {
 });
 
     Route::any('/painel/partidos/pesquisar', 'Painel\PartidoController@search')->name('partidos.search');
+    Route::get('/painel/partidos/buscapais','PartidoController@autoComplete')->name('partidos.searchajax');
     Route::resource('/painel/partidos', 'Painel\PartidoController');
-Route::get('/painel/paises' , function (){
- return view('/painel/countries/index');
-});	
+	
+	Route::any('/painel/paises/pesquisar', 'Painel\PaisController@search')->name('paises.search');
+    Route::resource('/painel/paises', 'Painel\PaisController');
+
+
 
 Auth::routes();
 

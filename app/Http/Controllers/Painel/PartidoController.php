@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Painel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Painel\Party;
+use App\Models\Painel\Country;
 use App\Http\Requests\Painel\PartyFormRequest;
 
 class PartidoController extends Controller
@@ -170,87 +171,21 @@ class PartidoController extends Controller
                 return redirect()->route('partidos.show', $id)->with(['errors' => 'Falha ao deletar']);
     }
     
-    public function tests()
-    {
-        /*
-         $prod = $this->party;
-         $prod->name = 'Nome do Produto';
-         $prod->number = 131231;
-         $prod->active = true;
-         $prod->category = 'eletronicos';
-         $prod->description = 'Description do produto aqui';
-         $insert = $prod->save();
-         
-         if( $insert )
-         return 'Inserido com sucesso';
-         else
-         return 'Falha ao inserir';
-         *
-         */
-         /*
-          $insert = $this->party->create([
-          'name'          => 'Nome do Produto 2',
-          'number'        => 434435,
-          'active'        => false,
-          'category'      => 'eletronicos',
-          'description'   => 'Descrição vem aqui',
-          ]);
-          if( $insert )
-          return "Inserido com sucesso, ID: {$insert->id}";
-          else
-          return 'Falha ao inserir';
-          *
-          */
-          /*
-           $prod = $this->party->find(5);
-           $prod->name = 'Update 2';
-           $prod->number = 797890;
-           $update = $prod->save();
-           
-           if( $update )
-           return 'Alterado com sucesso!';
-           else
-           return 'Falha ao alterar.';
-           *
-           */
-           /*
-            $prod = $this->party->find(6);
-            $update = $prod->update([
-            'name'          => 'Update Test',
-            'number'        => 6765756,
-            'active'        => true,
-            ]);
-            
-            if( $update )
-            return 'Alterado com sucesso!';
-            else
-            return 'Falha ao alterar.';
-            *
-            */
-            
-            /*
-             $update = $this->party
-             ->where('number', 6765756)
-             ->update([
-             'name'          => 'Update Test 2',
-             'number'        => 67657560,
-             'active'        => false,
-             ]);
-             
-             if( $update )
-             return 'Alterado com sucesso 2!';
-             else
-             return 'Falha ao alterar.';
-             *
-             
-             $delete = $this->party
-             ->where('number', 67657560)
-             ->delete();
-             
-             if( $delete )
-                 return 'Deletado com sucesso 2';
-                 else
-                     return 'Falha ao deletar';*/
+    public function autoComplete(Request $request) {
+        $term=$request->term;
+
+        $data = country::where('name','LIKE','%'.$term.'%')
+                ->take(10)
+                ->get();
+
+        $result=array();
+
+        foreach ($data as $key => $v){
+            $result[]=['value' =>$value->id];
+        }
+        
+        return response()->json($results);
+       
     }
     
     public function search(Request $request)
@@ -260,7 +195,7 @@ class PartidoController extends Controller
         $keySearch = $dataForm['search'];
         
         //Título da página
-        $title = "Resultados para produto: {$keySearch}";
+        $title = "Resultados para partido: {$keySearch}";
         
         //Faz o filtro dos dados
         $parties = $this->party

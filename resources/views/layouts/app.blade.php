@@ -12,12 +12,12 @@
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 <!--
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="{{url('assets/painel/css/style.css')}}"> -->
-
 </head>
 <body>
 	<div id="app">
@@ -34,7 +34,7 @@
 					</button>
 
 					<!-- Branding Image -->
-					<a class="navbar-brand" href="{{ url('/') }}"> {{
+					<a class="navbar-brand" href="{{ url('/home') }}"> {{
 						config('app.name', 'Corruptela') }} </a>
 				</div>
 
@@ -50,16 +50,27 @@
 						<li><a href="{{ route('login') }}">Login</a></li>
 						<li><a href="{{ route('register') }}">Register</a></li> @else
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-expanded="false"> {{
-								Auth::user()->name }} <span class="caret"></span>
+							data-toggle="dropdown" role="button" aria-expanded="false"> {{ Auth::user()->name }} <span class="caret"></span>
 						</a>
 
 							<ul class="dropdown-menu" role="menu">
+								<li><a href="{{route('partidos.index')}}">
+										Partidos </a>
+								</li>
+								<hr>
+								<li><a href="{{route('partidos.index')}}">
+										UF </a>
+								</li>
+
+								<li><a href="{{route('paises.index')}}">
+										Paises </a>
+								</li>
+
 								<li><a href="{{ route('logout') }}"
 									onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
 										Logout </a>
-
+									
 									<form id="logout-form" action="{{ route('logout') }}"
 										method="POST" style="display: none;">{{ csrf_field() }}</form>
 								</li>
