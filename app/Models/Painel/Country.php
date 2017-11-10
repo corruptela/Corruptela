@@ -9,7 +9,7 @@ class Country extends Model
     protected $table = 'countries';
     
     protected $fillable = [
-        'name', 'initials', 'active', 'oficialid'
+        'name', 'initials', 'oficialid'
     ];
     
     public function federativeUnits()
