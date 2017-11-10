@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-
+<div class="panel-heading">
 <h1 class="title-pg">
     <a href="{{route('paises.index')}}">
         <span class="glyphicon glyphicon-refresh"></span>
     </a>
     Listagem dos paises
 </h1>
-
+</div>
+<div class="panel-body">
 <a href="{{route('paises.create')}}" class="btn btn-primary btn-add">
     <span class="glyphicon glyphicon-plus"></span> Cadastrar
 </a>
@@ -44,5 +45,5 @@
 @else
     {!! $countries->links() !!}
 @endif
-
+</div>
 @endsection
