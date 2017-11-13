@@ -35,21 +35,11 @@
     </div>
 
 <div class="form-group">
-     {!! Form::text('search_country', null, array('placeholder' => 'Search Country','class' => 'form-control','id'=>'search_country')) !!}
+        {!! Form::text('countries_id', null, ['class' => 'form-control', 'placeholder' => 'País:']) !!}
 </div>
+
 
     {!! Form::submit('Enviar', ['class' => 'btn btn-primary']) !!}
 {!! Form::close() !!}
-
-<script type="text/javascript">
-    $('#search_country').autocomplete({
-      source : '{{route('paises.search')}}',
-      minlenght:1,
-      autoFocus:true,
-      select:function(e,ui){
-        alert(ui);
-      }
-    });
-</script>
 
 @endsection

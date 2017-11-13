@@ -16,10 +16,8 @@ Route::get('/', function () {
 //return 'pagina inicial';
 });
 
-    Route::any('/painel/partidos/pesquisar', 'Painel\PartidoController@search')->name('partidos.search');
-    Route::get('/painel/partidos/buscapais','PartidoController@autoComplete')->name('partidos.searchajax');
-    Route::resource('/painel/partidos', 'Painel\PartidoController');
-	
+    Route::any('/painel/partidos/pesquisar', 'Painel\PartidoController@search')->name('partidos.search');    
+    Route::resource('/painel/partidos', 'Painel\PartidoController');	
 	Route::any('/painel/paises/pesquisar', 'Painel\PaisController@search')->name('paises.search');
     Route::resource('/painel/paises', 'Painel\PaisController');
 

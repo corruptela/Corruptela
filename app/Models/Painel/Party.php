@@ -9,6 +9,6 @@ class Party extends Model
     protected $table = 'parties';
     
     protected $fillable = [
-        'name', 'initials', 'active'
+        'name', 'initials', 'active', 'countries_id'
     ];
 }
